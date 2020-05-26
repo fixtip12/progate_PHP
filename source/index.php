@@ -1,24 +1,4 @@
-<?php
-class Menu {
-  public $name;
-  
-  public function __construct($name) {
-    $this->name = $name;
-  }
-  
-  public function hello() {
-    echo '私は'.$this->name.'です';
-  }
-}
-
-$juice = new Menu('JUICE');
-$coffee = new Menu('COFFEE');
-$curry = new Menu('CURRY');
-$pasta = new Menu('PASTA');
-// 配列の中に上記の4つのインスタンスを順に入れて、変数$menusに代入してください
-$menus = [$juice,$coffee,$curry,$pasta];
-
-?>
+<?php require_once('data.php') ?>
 
 <!DOCTYPE html>
 <html>
@@ -32,11 +12,15 @@ $menus = [$juice,$coffee,$curry,$pasta];
   <div class="menu-wrapper container">
     <h1 class="logo">Café Progate</h1>
     <div class="menu-items">
-      <!-- 配列$menusの要素を変数$menuとするforeach文を書いてください -->
-      <?php foreach($menus as $menu): ?>
-        <h3><?php echo $menu->name; ?></h3>
-      <?php endforeach; ?>
-      
+      <?php foreach ($menus as $menu): ?>
+        <div class="menu-item">
+          <img src="<?php echo $menu->getImage() ?>" class="menu-item-image">
+          <h3 class="menu-item-name"><?php echo $menu->getName() ?></h3>
+          <!-- $menuのgetTaxIncludedPriceメソッドの戻り値を表示してください -->
+          <p class="price">¥<?php echo $menu->getTaxIncludedPrice(); ?>（税込）</p>
+          <p>注文数: <?php echo $menu->getOrderCount(); ?></p>
+        </div>
+      <?php endforeach ?>
     </div>
   </div>
 </body>
